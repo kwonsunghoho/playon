@@ -240,6 +240,9 @@ values
 ('인형뽑기-4','럭셔리자이언트 2인용','인형뽑기',true,false,320)
 on conflict (legacy_key) do nothing;
 
+-- Add solution_tags column (run once if upgrading an existing database)
+alter table public.products add column if not exists solution_tags text[] not null default '{}';
+
 -- After creating an Auth user in Supabase, make it an admin once:
 -- insert into public.admin_users(user_id)
 -- select id from auth.users where email = 'YOUR_ADMIN_EMAIL';
